@@ -25,12 +25,6 @@ const LoginPage: NextPage = () => {
       : setPasswordErrMsg('');
   };
 
-  console.log(idRef);
-
-  const handleKeyPress = (e) => {
-    console.log('나야');
-  };
-
   useEffect(() => {
     loginIdRequestHandler();
     loginPasswordRequestHandler();
