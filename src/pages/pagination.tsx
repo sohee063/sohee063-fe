@@ -12,7 +12,7 @@ import Pagination from '../components/Pagination';
 
 const PaginationPage: NextPage = () => {
   const dispatch = useDispatch();
-  const { allProductList, totalCount } = useSelector((state) => state.product);
+  const { allProductList, totalCount, err } = useSelector((state) => state.product);
   const router = useRouter();
   const { page } = router.query;
 
@@ -33,7 +33,7 @@ const PaginationPage: NextPage = () => {
         </Link>
       </Header>
       <Container>
-        {page > Math.ceil(totalCount / 5) ? (
+        {err ? (
           <ErrPageMsg>존재하지 않는 페이지입니다.</ErrPageMsg>
         ) : (
           <>

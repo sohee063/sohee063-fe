@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 import { Product } from '../types/product';
 
@@ -14,13 +15,19 @@ const inputPriceFormat = (str) => {
   return comma(str);
 };
 
-const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
-  <Container>
-    <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
-    <Name>{name}</Name>
-    <Price>{inputPriceFormat(price)}</Price>
-  </Container>
-);
+const ProductItem = ({ product: { name, thumbnail, price, id } }: ProductItemProps) => {
+  const router = useRouter();
+  return (
+    <Container>
+      <Thumbnail
+        src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'}
+        onClick={(e) => router.push(`/products/${id}`)}
+      />
+      <Name>{name}</Name>
+      <Price>{inputPriceFormat(price)}</Price>
+    </Container>
+  );
+};
 
 export default ProductItem;
 
