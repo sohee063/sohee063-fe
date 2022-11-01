@@ -6,11 +6,19 @@ type ProductItemProps = {
   product: Product;
 };
 
+const inputPriceFormat = (str) => {
+  const comma = (str) => {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+  };
+  return comma(str);
+};
+
 const ProductItem = ({ product: { name, thumbnail, price } }: ProductItemProps) => (
   <Container>
     <Thumbnail src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'} />
     <Name>{name}</Name>
-    <Price>{price}</Price>
+    <Price>{inputPriceFormat(price)}</Price>
   </Container>
 );
 

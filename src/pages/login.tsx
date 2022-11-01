@@ -63,8 +63,6 @@ const LoginPage: NextPage = () => {
 
   const loginRequest = () => {
     dispatch(loginActions(id, password));
-
-    console.log('네임', userName);
   };
 
   ///
