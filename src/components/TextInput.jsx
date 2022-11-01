@@ -1,12 +1,7 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const TextInput = ({ type, value, err, handlerValueState, handlerOnblur, handleKeyPress }) => {
-  const isError = () => {
-    if (err !== undefined) {
-      handlerOnblur();
-    }
-  };
-
   return (
     <IptFormArea>
       <input
@@ -16,6 +11,7 @@ const TextInput = ({ type, value, err, handlerValueState, handlerOnblur, handleK
         onChange={handlerValueState}
         onKeyPress={handleKeyPress}
         autoComplete='off'
+        onBlur={handlerOnblur}
       ></input>
     </IptFormArea>
   );
