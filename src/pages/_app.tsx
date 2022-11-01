@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app';
 import styled from 'styled-components';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -8,13 +10,13 @@ setupMSW();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <Background />
       <Content>
         <Component {...pageProps} />
       </Content>
-    </>
+    </Provider>
   );
 }
 
