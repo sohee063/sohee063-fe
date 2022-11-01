@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllWantedList } from '../redux/actions/productActions';
+import { getAllProductList } from '../redux/actions/productActions';
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
@@ -18,7 +18,7 @@ const PaginationPage: NextPage = () => {
 
   useEffect(() => {
     if (page) {
-      dispatch(getAllWantedList(Number(page)));
+      dispatch(getAllProductList(Number(page)));
     }
   }, [page]);
 

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllWantedList } from '../redux/actions/productActions';
-import usePagination from '../hooks/usePagination';
+import { getAllProductList } from '../redux/actions/productActions';
 
 const Pagination = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,7 @@ const Pagination = () => {
           key={i}
           onClick={(e) => {
             router.push(`/pagination?page=${i}`);
-            dispatch(getAllWantedList(i));
+            dispatch(getAllProductList(i));
           }}
         >
           {i}
@@ -57,7 +56,7 @@ const Pagination = () => {
         disabled={pageGroup === 1}
         onClick={(e) => {
           router.push(`/pagination?page=${pageGroup * 5 - 9}`);
-          dispatch(getAllWantedList(pageGroup * 5 - 9));
+          dispatch(getAllProductList(pageGroup * 5 - 9));
         }}
       >
         <VscChevronLeft />
@@ -67,7 +66,7 @@ const Pagination = () => {
         disabled={pageGroup * 50 > total_page}
         onClick={(e) => {
           router.push(`/pagination?page=${pageGroup * 5 + 1}`);
-          dispatch(getAllWantedList(pageGroup * 5 + 1));
+          dispatch(getAllProductList(pageGroup * 5 + 1));
         }}
       >
         <VscChevronRight />

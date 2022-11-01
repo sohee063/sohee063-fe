@@ -3,7 +3,7 @@ import { customAxios } from '../axiosAPI';
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';
 
-export const getAllWantedList = (page) => {
+export const getAllProductList = (page) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -12,7 +12,7 @@ export const getAllWantedList = (page) => {
           loading: true,
         },
       });
-      const get_AllWantedList = await customAxios
+      const get_AllProductList = await customAxios
         .get(`/products?page=${page}&size=10`)
         .then((res) => {
           return res;
@@ -20,7 +20,7 @@ export const getAllWantedList = (page) => {
       dispatch({
         type: 'GET_PRODUCTS_SUCCESS',
         payload: {
-          allProductList: get_AllWantedList.data,
+          allProductList: get_AllProductList.data,
         },
       });
       dispatch({
