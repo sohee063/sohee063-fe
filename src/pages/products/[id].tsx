@@ -1,12 +1,31 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import products from '../../api/data/products.json';
+import { getProductDetail } from '../../redux/actions/productActions';
 
 const ProductDetailPage: NextPage = () => {
-  const product = products[0];
+  const dispatch = useDispatch();
+  const { productDetail, err } = useSelector((state) => state.product);
+  const router = useRouter();
+  const {
+    query: { id },
+  } = router;
+
+  const inputPriceFormat = (str) => {
+    const comma = (str) => {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    };
+    return comma(str);
+  };
+
+  useEffect(() => {
+    if (id) dispatch(getProductDetail(id));
+  }, [id]);
 
   return (
     <>
@@ -18,11 +37,21 @@ const ProductDetailPage: NextPage = () => {
           <p>login</p>
         </Link>
       </Header>
-      <Thumbnail src={product.thumbnail ? product.thumbnail : '/defaultThumbnail.jpg'} />
-      <ProductInfoWrapper>
-        <Name>{product.name}</Name>
-        <Price>{product.price}원</Price>
-      </ProductInfoWrapper>
+      <Container>
+        {err ? (
+          <ErrPageMsg>존재하지 않는 페이지입니다.</ErrPageMsg>
+        ) : (
+          <>
+            <Thumbnail
+              src={productDetail.thumbnail ? productDetail.thumbnail : '/defaultThumbnail.jpg'}
+            />
+            <ProductInfoWrapper>
+              <Name>{productDetail.name}</Name>
+              <Price>{inputPriceFormat(productDetail.price)}원</Price>
+            </ProductInfoWrapper>
+          </>
+        )}
+      </Container>
     </>
   );
 };
@@ -58,4 +87,18 @@ const Name = styled.div`
 const Price = styled.div`
   font-size: 18px;
   margin-top: 8px;
+`;
+
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ErrPageMsg = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
