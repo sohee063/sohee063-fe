@@ -7,13 +7,15 @@ type ProductListProps = {
   products: Product[];
 };
 
-const ProductList = ({ products }: ProductListProps) => (
-  <Container>
-    {products.map((product) => (
-      <ProductItem key={product.id} product={product} />
-    ))}
-  </Container>
-);
+const ProductList = ({ products }: ProductListProps) => {
+  return (
+    <Container>
+      {products.map((product) => (
+        <ProductItem key={Math.random() * 100} product={product} />
+      ))}
+    </Container>
+  );
+};
 
 export default ProductList;
 
