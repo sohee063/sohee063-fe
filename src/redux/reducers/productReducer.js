@@ -1,14 +1,20 @@
 import {
   GET_ALL_PRODUCTS_SUCCESS,
   GET_DETAIL_PRODUCTS_SUCCESS,
+<<<<<<< HEAD
   GET_SCROLL_PRODUCTS_SUCCESS,
+=======
+>>>>>>> main
   PRODUCT_LOADING,
   PRODUCT_ERROR,
 } from '../actions/productActions';
 
 const initialstate = {
   allProductList: [],
+<<<<<<< HEAD
   scrollProductList: [],
+=======
+>>>>>>> main
   productDetail: [],
   totalCount: '',
   loading: '',
@@ -25,12 +31,15 @@ const productReducer = (state = initialstate, action) => {
         allProductList: payload.allProductList.data.products,
         totalCount: payload.allProductList.data.totalCount,
       };
+<<<<<<< HEAD
     case GET_SCROLL_PRODUCTS_SUCCESS:
       return {
         ...state,
         scrollProductList: [...state.scrollProductList, ...payload.scrollProductList.data.products],
         totalCount: payload.scrollProductList.data.totalCount,
       };
+=======
+>>>>>>> main
     case GET_DETAIL_PRODUCTS_SUCCESS:
       return {
         ...state,
