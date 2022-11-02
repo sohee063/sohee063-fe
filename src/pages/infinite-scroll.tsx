@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 
+import Header from '../components/Header';
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,14 +45,7 @@ const InfiniteScrollPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <Header />
       <Container>
         <ProductList products={scrollProductList} />
       </Container>
@@ -61,17 +55,6 @@ const InfiniteScrollPage: NextPage = () => {
 };
 
 export default InfiniteScrollPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Container = styled.div`
   display: flex;

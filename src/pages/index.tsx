@@ -2,24 +2,10 @@ import Link from 'next/link';
 import type { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Cookies from 'js-cookie';
-import { logoutActions } from '../redux/actions/loginActions';
-import { useSelector, useDispatch } from 'react-redux';
+import Header from '../components/Header';
 
 const HomePage: NextPage = () => {
   const [domLoaded, setDomLoaded] = useState(false);
-  const dispatch = useDispatch();
-  const isLogin = Cookies.get('access');
-  let userName;
-
-  if (typeof window !== 'undefined') {
-    userName = localStorage.getItem('userName');
-  }
-
-  const logout = () => {
-    dispatch(logoutActions());
-  };
-
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -28,22 +14,7 @@ const HomePage: NextPage = () => {
     <>
       {domLoaded && (
         <>
-          <Header>
-            <Link href='/'>
-              <Title>HAUS</Title>
-            </Link>
-
-            {isLogin ? (
-              <div>
-                <p>{userName}</p>
-                <p onClick={logout}>logout</p>
-              </div>
-            ) : (
-              <Link href='/login'>
-                <p>login</p>
-              </Link>
-            )}
-          </Header>
+          <Header />
           <Container>
             <Link href='/pagination?page=1'>
               <StyledLink>pagination</StyledLink>
@@ -59,29 +30,6 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-
-  div {
-    text-align: end;
-  }
-
-  p {
-    cursor: pointer;
-
-    :hover {
-      color: silver;
-    }
-  }
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Container = styled.div`
   display: flex;

@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
+import Authentication from '../components/Authentication';
 
 import setupMSW from '../api/setup';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <Background />
       <Content>
-        <Component {...pageProps} />
+        <Authentication>
+          <Component {...pageProps} />
+        </Authentication>
       </Content>
     </Provider>
   );
