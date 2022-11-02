@@ -6,32 +6,20 @@ import TextInput from '../components/TextInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginActions } from '../redux/actions/loginActions';
 
-// 초기값은 에러없음. ( && 연산자로 묶는다. )
-// focus out 될 때 + 유효하지 않은 값일 때 에러메세지 보여주고 배경색 바뀌고
-// 유효한 값 일 때는 무조건 에러메세지가 사라지고 배경색도 바뀐다.
-
 const LoginPage: NextPage = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [idErrMsg, setIdErrMsg] = useState('');
   const [passwordErrMsg, setPasswordErrMsg] = useState('');
 
-  // const [loginValid, setLoginValid] = useState(false);
-  // const [isIdValidInput, setIsIdValidInput] = useState(true);
-  // const [isPasswordValidInput, setIsPasswordValidInput] = useState(true);
+  let dispatch = useDispatch();
 
   let isIdValidInput = (/^[a-zA-Z0-9\`~!@#$%^&*()-_=+]{5,30}$/.test(id) ^ (id.length > 0)) == 0;
   let isPasswordValidInput =
     (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,30}$/.test(password) ^
       (password.length > 0)) ==
     0;
-
-  // let isIdValid = /^[a-zA-Z0-9\`~!@#$%^&*()-_=+]{5,30}$/;
-  // let isPasswordValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,30}$/;
-
   let loginValid = isIdValidInput && id.length > 0 && isPasswordValidInput && password.length > 0;
-
-  // let isIdValidInput, isPasswordValidInput;
 
   const loginIdRequestHandler = () => {
     !isIdValidInput ? setIdErrMsg('올바른 아이디 형식으로 입력해주세요.') : setIdErrMsg('');
@@ -43,29 +31,18 @@ const LoginPage: NextPage = () => {
   };
 
   const handlerOnblur = () => {
-    //   // if (!isIdValidInput || !isPasswordValidInput) {
-    //   loginIdRequestHandler();
-    //   loginPasswordRequestHandler();
-    //   // }
-    //   isIdValidInput = (isIdValid.test(id) ^ (id.length > 0)) == 0;
-    //   isPasswordValidInput = (isPasswordValid.test(password) ^ (password.length > 0)) == 0;
+    loginIdRequestHandler();
+    loginPasswordRequestHandler();
   };
-
-  // console.log(loginValid);
-
-  // useEffect(() => {
-  //   handlerOnblur();
-  // }, [id, password, isIdValidInput, isPasswordValidInput]);
-
-  /// redux
-
-  let dispatch = useDispatch();
 
   const loginRequest = () => {
     dispatch(loginActions(id, password));
   };
 
-  ///
+  useEffect(() => {
+    isIdValidInput && setIdErrMsg('');
+    isPasswordValidInput && setPasswordErrMsg('');
+  }, [id, password]);
 
   return (
     <>

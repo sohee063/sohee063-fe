@@ -9,6 +9,7 @@ import { getAllProductList } from '../redux/actions/productActions';
 import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
+import Header from '../components/Header';
 
 const PaginationPage: NextPage = () => {
   const dispatch = useDispatch();
@@ -24,14 +25,7 @@ const PaginationPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <Header />
       <Container>
         {err ? (
           <ErrPageMsg>존재하지 않는 페이지입니다.</ErrPageMsg>
@@ -47,17 +41,6 @@ const PaginationPage: NextPage = () => {
 };
 
 export default PaginationPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Container = styled.div`
   height: 100vh;

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { customAxios } from '../axiosAPI';
+import { ToastContainer, toast } from 'react-toast';
 
 export const loginActions = (id, password) => {
   return async (dispatch) => {
@@ -14,7 +15,7 @@ export const loginActions = (id, password) => {
             expires: 7,
           });
           localStorage.setItem('userName', res.data.data.user.NAME);
-          return res;
+          localStorage.setItem('userID', res.data.data.user.ID);
         })
         .then((res) => window.location.replace('/'));
     } catch (error) {
@@ -28,6 +29,7 @@ export const logoutActions = () => {
     try {
       Cookies.remove('access');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userID');
       window.location.replace('/');
     } catch (error) {
       console.log(error);
