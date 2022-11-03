@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
 
   html, body, #__next {
     height: 100%;
+    width:100vw
   }
 
   img, picture, video, svg, canvas {

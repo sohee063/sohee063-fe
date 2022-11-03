@@ -3,8 +3,9 @@ import type { NextPage } from 'next';
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import TextInput from '../components/TextInput';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginActions } from '../redux/actions/loginActions';
+import Header from '../components/Header';
 
 const LoginPage: NextPage = () => {
   const [id, setId] = useState('');
@@ -46,37 +47,34 @@ const LoginPage: NextPage = () => {
 
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <Header />
       <Form>
-        <div>아이디</div>
-        <div>
-          <TextInput
-            type='text'
-            value={id || ''}
-            handlerValueState={(e) => setId(e.target.value)}
-            err={!isIdValidInput}
-            handlerOnblur={handlerOnblur}
-          />
-        </div>
-        <p className='err'>{idErrMsg}</p>
-        <div>비밀번호</div>
-        <div>
-          <TextInput
-            type='password'
-            value={password || ''}
-            handlerValueState={(e) => setPassword(e.target.value)}
-            err={!isPasswordValidInput}
-            handlerOnblur={handlerOnblur}
-          />
-        </div>
-        <p className='err'>{passwordErrMsg}</p>
+        <InputForm>
+          <div>아이디</div>
+          <div>
+            <TextInput
+              type='text'
+              value={id || ''}
+              handlerValueState={(e) => setId(e.target.value)}
+              err={!isIdValidInput}
+              handlerOnblur={handlerOnblur}
+            />
+          </div>
+          <p>{idErrMsg}</p>
+        </InputForm>
+        <InputForm>
+          <div>비밀번호</div>
+          <div>
+            <TextInput
+              type='password'
+              value={password || ''}
+              handlerValueState={(e) => setPassword(e.target.value)}
+              err={!isPasswordValidInput}
+              handlerOnblur={handlerOnblur}
+            />
+          </div>
+          <p>{passwordErrMsg}</p>
+        </InputForm>
         <LoginButton disabled={!loginValid} onClick={() => loginRequest()}>
           로그인
         </LoginButton>
@@ -87,22 +85,15 @@ const LoginPage: NextPage = () => {
 
 export default LoginPage;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
-
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
   padding: 0 20px 40px;
+`;
+
+const InputForm = styled.div`
+  margin-bottom: 16px;
 
   > div:first-child {
     font-weight: 700;
@@ -124,6 +115,7 @@ const LoginButton = styled.button`
   border-radius: 12px;
   background-color: #222;
   color: #fff;
+  cursor: pointer;
 
   &:disabled {
     background-color: #e2e2ea;
