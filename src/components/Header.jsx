@@ -55,7 +55,7 @@ const HeaderSection = styled.div`
     text-align: end;
   }
 
-  p: nth-child(2) {
+  p {
     cursor: pointer;
 
     :hover {

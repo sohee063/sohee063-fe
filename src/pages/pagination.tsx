@@ -6,14 +6,13 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAllProductList } from '../redux/actions/productActions';
-import products from '../api/data/products.json';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 import Header from '../components/Header';
 
 const PaginationPage: NextPage = () => {
   const dispatch = useDispatch();
-  const { allProductList, totalCount, err } = useSelector((state) => state.product);
+  const { allProductList, err } = useSelector((state) => state.product);
   const router = useRouter();
   const { page } = router.query;
 
