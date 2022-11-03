@@ -32,11 +32,11 @@ const Header = () => {
       {access && decoded.user?.id === userId ? (
         <div>
           <p>{userName}</p>
-          <p onClick={logout}>logout</p>
+          <LogoutBtn onClick={logout}>logout</LogoutBtn>
         </div>
       ) : (
         <Link href='/login'>
-          <p>login</p>
+          <LoginBtn>login</LoginBtn>
         </Link>
       )}
     </HeaderSection>
@@ -55,7 +55,7 @@ const HeaderSection = styled.div`
     text-align: end;
   }
 
-  p {
+  p: nth-child(2) {
     cursor: pointer;
 
     :hover {
@@ -64,6 +64,37 @@ const HeaderSection = styled.div`
   }
 `;
 
+const LoginBtn = styled.button`
+  background-color: #6d6bd1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+  transition: all 0.2s;
+
+  :hover,
+  focus {
+    background-color: #5553c4;
+  }
+`;
+
+const LogoutBtn = styled(LoginBtn)`
+  background-color: transparent;
+  color: #222;
+  border: 1px solid #e2e2ea;
+
+  :hover,
+  focus {
+    color: #6d6bd1;
+    border: 1px solid #6d6bd1;
+    background-color: transparent;
+  }
+`;
+
 const Title = styled.a`
   font-size: 48px;
+  cursor: pointer;
 `;

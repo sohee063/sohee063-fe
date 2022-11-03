@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
@@ -88,6 +88,7 @@ const Container = styled.div`
 `;
 
 const Button = styled.button`
+  cursor: pointer;
   &:disabled {
     color: #e2e2ea;
     cursor: default;
@@ -104,15 +105,14 @@ type PageType = {
 };
 
 const Page = styled.button<PageType>`
+  cursor: pointer;
   padding: 4px 6px;
   background-color: ${({ selected }) => (selected ? '#000' : 'transparent')};
   color: ${({ selected }) => (selected ? '#fff' : '#000')};
   font-size: 20px;
-
   & + & {
     margin-left: 4px;
   }
-
   &:disabled {
     cursor: default;
   }

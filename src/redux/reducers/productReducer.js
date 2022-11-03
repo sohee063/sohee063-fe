@@ -12,7 +12,7 @@ const initialstate = {
   productDetail: [],
   totalCount: '',
   loading: '',
-  err: '',
+  err: false,
 };
 
 const productReducer = (state = initialstate, action) => {

@@ -7,11 +7,16 @@ type ProductListProps = {
   products: Product[];
 };
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({ products, scrollPosition, page }: ProductListProps) => {
   return (
     <Container>
       {products.map((product) => (
-        <ProductItem key={Math.random() * 100} product={product} />
+        <ProductItem
+          key={Math.random() * 100}
+          product={product}
+          scrollPosition={scrollPosition}
+          page={page}
+        />
       ))}
     </Container>
   );

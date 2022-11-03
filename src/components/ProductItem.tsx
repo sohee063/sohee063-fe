@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-
 import { Product } from '../types/product';
 
 type ProductItemProps = {
@@ -15,13 +14,21 @@ const inputPriceFormat = (str) => {
   return comma(str);
 };
 
-const ProductItem = ({ product: { name, thumbnail, price, id } }: ProductItemProps) => {
+const ProductItem = ({
+  product: { name, thumbnail, price, id },
+  scrollPosition,
+  page,
+}: ProductItemProps) => {
   const router = useRouter();
   return (
     <Container>
       <Thumbnail
         src={thumbnail ? thumbnail : '/defaultThumbnail.jpg'}
-        onClick={(e) => router.push(`/products/${id}`)}
+        onClick={(e) => {
+          router.push(`/products/${id}`);
+          sessionStorage.setItem('scroll', scrollPosition);
+          sessionStorage.setItem('page', page);
+        }}
       />
       <Name>{name}</Name>
       <Price>{inputPriceFormat(price)}</Price>
@@ -40,6 +47,7 @@ const Container = styled.a`
 const Thumbnail = styled.img`
   width: 100%;
   height: 180px;
+  cursor: pointer;
 `;
 
 const Name = styled.div`

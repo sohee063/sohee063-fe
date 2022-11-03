@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProductDetail } from '../../redux/actions/productActions';
+import Header from '../../components/Header';
 
 const ProductDetailPage: NextPage = () => {
   const dispatch = useDispatch();
@@ -27,16 +28,11 @@ const ProductDetailPage: NextPage = () => {
     if (id) dispatch(getProductDetail(id));
   }, [id]);
 
+  console.log('에러', err);
+
   return (
     <>
-      <Header>
-        <Link href='/'>
-          <Title>HAUS</Title>
-        </Link>
-        <Link href='/login'>
-          <p>login</p>
-        </Link>
-      </Header>
+      <Header />
       <Container>
         {err ? (
           <ErrPageMsg>존재하지 않는 페이지입니다.</ErrPageMsg>
@@ -57,17 +53,6 @@ const ProductDetailPage: NextPage = () => {
 };
 
 export default ProductDetailPage;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Title = styled.a`
-  font-size: 48px;
-`;
 
 const Thumbnail = styled.img`
   width: 100%;
@@ -93,7 +78,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 `;
 
 const ErrPageMsg = styled.div`
