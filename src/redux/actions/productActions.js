@@ -1,4 +1,5 @@
-import { customAxios } from '../axiosAPI';
+// import { axios } from '../axiosAPI';
+import axios from 'axios';
 
 export const GET_ALL_PRODUCTS_SUCCESS = 'GET_ALL_PRODUCTS_SUCCESS';
 export const GET_DETAIL_PRODUCTS_SUCCESS = 'GET_DETAIL_PRODUCTS_SUCCESS';
@@ -10,11 +11,9 @@ export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 export const getAllProductList = (page) => {
   return async (dispatch) => {
     try {
-      const get_AllProductList = await customAxios
-        .get(`/products?page=${page}&size=10`)
-        .then((res) => {
-          return res;
-        });
+      const get_AllProductList = await axios.get(`/products?page=${page}&size=10`).then((res) => {
+        return res;
+      });
       dispatch({
         type: 'GET_ALL_PRODUCTS_SUCCESS',
         payload: {
@@ -41,7 +40,7 @@ export const getScrollProductList = (page) => {
           loading: true,
         },
       });
-      const get_ScrollProductList = await customAxios
+      const get_ScrollProductList = await axios
         .get(`/products?page=${page}&size=16`)
         .then((res) => {
           return res;
@@ -78,7 +77,7 @@ export const getProductDetail = (id) => {
           loading: true,
         },
       });
-      const get_ProductDetail = await customAxios.get(`/products/${id}`).then((res) => {
+      const get_ProductDetail = await axios.get(`/products/${id}`).then((res) => {
         return res;
       });
       dispatch({

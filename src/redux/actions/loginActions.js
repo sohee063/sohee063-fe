@@ -1,10 +1,10 @@
+import axios from 'axios';
 import Cookies from 'js-cookie';
-import { customAxios } from '../axiosAPI';
 
 export const loginActions = (id, password) => {
   return async (dispatch) => {
     try {
-      return await customAxios
+      return await axios
         .post(`/login`, {
           id: id,
           password: password,

@@ -1,23 +1,21 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export const customAxios = axios.create({
-  // baseURL: BASE_URL,
-});
+export const customAxios = axios.create({});
 
-customAxios.interceptors.request.use(function (config) {
-  config.headers['Content-type'] = 'application/json';
-  config.headers['charset'] = 'UTF-8';
+// customAxios.interceptors.request.use(function (config) {
+//   config.headers['Content-type'] = 'application/json';
+//   config.headers['charset'] = 'UTF-8';
 
-  if (!Cookies.get('access')) {
-    config.headers['Authorization'] = null;
-    return config;
-  }
-  config.headers['Content-type'] = 'application/json';
-  config.headers['charset'] = 'UTF-8';
-  config.headers['Authorization'] = `Bearer ${Cookies.get('access')}`;
-  return config;
-});
+//   if (!Cookies.get('access')) {
+//     config.headers['Authorization'] = null;
+//     return config;
+//   }
+//   config.headers['Content-type'] = 'application/json';
+//   config.headers['charset'] = 'UTF-8';
+//   config.headers['Authorization'] = `Bearer ${Cookies.get('access')}`;
+//   return config;
+// });
 
 customAxios.interceptors.request.use(
   function (config) {
