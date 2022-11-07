@@ -54,14 +54,6 @@ const HeaderSection = styled.div`
   div {
     text-align: end;
   }
-
-  p {
-    cursor: pointer;
-
-    :hover {
-      color: silver;
-    }
-  }
 `;
 
 const LoginBtn = styled.button`

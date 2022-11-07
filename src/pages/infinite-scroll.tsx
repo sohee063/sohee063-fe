@@ -7,14 +7,15 @@ import Header from '../components/Header';
 import ProductList from '../components/ProductList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getScrollProductList } from '../redux/actions/productActions';
+import Loading from '../components/Loading';
 
 const InfiniteScrollPage: NextPage = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { scrollProductList, totalCount } = useSelector((state) => state.product);
+  const { scrollProductList, totalCount, loading } = useSelector((state) => state.product);
 
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.2,
   });
 
   const fakeFetch = (delay = 300) => new Promise((res) => setTimeout(res, delay));
@@ -38,13 +39,12 @@ const InfiniteScrollPage: NextPage = () => {
     if (page === 1) {
       let savePage = sessionStorage.getItem('page');
       setPage(Number(savePage));
-    } else return;
+    }
   }, [page]);
 
   useEffect(() => {
     if (scrollProductList.length < 1) {
       dispatch(getScrollProductList(1));
-      // return;
     }
     sessionStorage.setItem('page', 1);
   }, []);
@@ -74,7 +74,8 @@ const InfiniteScrollPage: NextPage = () => {
       <Container>
         <ProductList products={scrollProductList} scrollPosition={position} page={page} />
       </Container>
-      <Scroll ref={ref}></Scroll>
+      {/* <Loader></Loader> */}
+      <Scroll ref={ref}>{loading && <Loading />}</Scroll>
     </>
   );
 };
@@ -82,18 +83,15 @@ const InfiniteScrollPage: NextPage = () => {
 export default InfiniteScrollPage;
 
 const Container = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 20px 40px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  /* height: 100%; */
   margin-top: 40px;
 `;
 
 const Scroll = styled.div`
-  height: 200px;
+  height: 100px;
+  margin: 50px;
 `;

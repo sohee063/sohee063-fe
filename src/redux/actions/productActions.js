@@ -3,18 +3,13 @@ import { customAxios } from '../axiosAPI';
 export const GET_ALL_PRODUCTS_SUCCESS = 'GET_ALL_PRODUCTS_SUCCESS';
 export const GET_DETAIL_PRODUCTS_SUCCESS = 'GET_DETAIL_PRODUCTS_SUCCESS';
 export const GET_SCROLL_PRODUCTS_SUCCESS = 'GET_SCROLL_PRODUCTS_SUCCESS';
+export const GET_RESET_PRODUCTS_SUCCESS = 'GET_RESET_PRODUCTS_SUCCESS';
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 
 export const getAllProductList = (page) => {
   return async (dispatch) => {
     try {
-      dispatch({
-        type: 'PRODUCT_LOADING',
-        payload: {
-          loading: true,
-        },
-      });
       const get_AllProductList = await customAxios
         .get(`/products?page=${page}&size=10`)
         .then((res) => {
@@ -24,12 +19,6 @@ export const getAllProductList = (page) => {
         type: 'GET_ALL_PRODUCTS_SUCCESS',
         payload: {
           allProductList: get_AllProductList.data,
-        },
-      });
-      dispatch({
-        type: 'PRODUCT_LOADING',
-        payload: {
-          loading: false,
         },
       });
     } catch (error) {
@@ -111,6 +100,21 @@ export const getProductDetail = (id) => {
           payload: error.response.data,
         });
       }
+    }
+  };
+};
+
+export const getResetProductList = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: 'GET_RESET_PRODUCTS_SUCCESS',
+        payload: {
+          allProductList: '',
+        },
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };
