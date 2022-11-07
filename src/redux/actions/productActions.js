@@ -1,4 +1,3 @@
-// import { axios } from '../axiosAPI';
 import axios from 'axios';
 
 export const GET_ALL_PRODUCTS_SUCCESS = 'GET_ALL_PRODUCTS_SUCCESS';

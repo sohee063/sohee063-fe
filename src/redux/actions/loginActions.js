@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const loginActions = (id, password) => {
-  return async (dispatch) => {
+  return async () => {
     try {
       return await axios
         .post(`/login`, {
