@@ -6,6 +6,7 @@ import Header from '../components/Header';
 
 const HomePage: NextPage = () => {
   const [domLoaded, setDomLoaded] = useState(false);
+
   useEffect(() => {
     setDomLoaded(true);
     sessionStorage.removeItem('scroll');

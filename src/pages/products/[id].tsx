@@ -25,10 +25,10 @@ const ProductDetailPage: NextPage = () => {
   };
 
   useEffect(() => {
-    if (id) dispatch(getProductDetail(id));
+    if (id) dispatch(getProductDetail(Number(id)));
   }, [id]);
 
-  console.log('에러', err);
+  console.log('에러', err, id);
 
   return (
     <>

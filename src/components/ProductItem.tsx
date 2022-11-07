@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Product } from '../types/product';
+import { useSelector } from 'react-redux';
 
 type ProductItemProps = {
   product: Product;

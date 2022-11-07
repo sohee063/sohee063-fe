@@ -2,6 +2,7 @@ import {
   GET_ALL_PRODUCTS_SUCCESS,
   GET_DETAIL_PRODUCTS_SUCCESS,
   GET_SCROLL_PRODUCTS_SUCCESS,
+  GET_RESET_PRODUCTS_SUCCESS,
   PRODUCT_LOADING,
   PRODUCT_ERROR,
 } from '../actions/productActions';
@@ -34,6 +35,11 @@ const productReducer = (state = initialstate, action) => {
       return {
         ...state,
         productDetail: payload.productDetail.data.product,
+      };
+    case GET_RESET_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        allProductList: payload.allProductList,
       };
     case PRODUCT_LOADING:
       return {
